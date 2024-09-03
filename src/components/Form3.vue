@@ -12,6 +12,7 @@ const props = defineProps({
 const self = getCurrentInstance()?.appContext.config.globalProperties
 const { errors } = useErrors()
 const userEmail = ref("")
+const userPass = ref("")
 
 const checkError = () => {
   self?.$validator.validateAll().then(({isValid}: any) => {
@@ -30,15 +31,28 @@ const checkError = () => {
 <template>
   <form @submit.prevent="checkError" class="greetings">
     <p>{{ msg }}</p>
-    <input type="text" placeholder="userEmail" name="userEmail" v-model="userEmail" v-validate="'required|length:7'"
+    <div>
+      <input type="text" placeholder="userEmail" name="userEmail" v-model="userEmail" v-validate="'required|email'"
       :data-vv-validate-on="'blur|keyup'" />
-    <button type="submit">Submit</button>
 
-    <div style="color: red;">
       <div v-if="errors?.has('userEmail')">this is not valid</div>
       <div v-if="errors?.has('userEmail:required')">this is required</div>
-      <div v-if="errors?.has('userEmail:length')">this should length = 7</div>
+      <div v-if="errors?.has('userEmail:email')">this should be an email</div>
     </div>
+
+    <div>
+      <input type="text" placeholder="userPass" name="userPass" 
+      v-model="userPass" v-validate="{
+        required: true,
+        length: 7
+      }"
+      :data-vv-validate-on="'blur|keyup'" />
+
+      <div v-if="errors?.has('userPass')">this is not valid</div>
+      <div v-if="errors?.has('userPass:required')">this is required</div>
+      <div v-if="errors?.has('userPass:length')">this should length = 7</div>
+    </div>
+    <button type="submit">Submit</button>
   </form>
 </template>
 

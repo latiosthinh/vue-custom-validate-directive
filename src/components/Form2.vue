@@ -1,32 +1,21 @@
-<script>
+<script setup lang="ts">
 import { useErrors } from "@/plugins/store";
 import { ref } from 'vue';
 
-export default {
-  name: 'HelloWorld2',
-  props: {
-    msg: {
-      type: String,
-      required: true
-    }
-  },
-  setup() {
-    const phone = ref("")
-    const { errors } = useErrors()
+const props = defineProps({
+  msg: {
+    type: String,
+    required: true
+  }
+})
 
-    const checkError = () => {
-      console.log(errors.value)
-      if (!errors.value.size) {
-        console.log('submitted')
-      }
-    }
+const phone = ref("")
+const { errors } = useErrors()
 
-
-    return {
-      phone,
-      errors,
-      checkError
-    }
+const checkError = () => {
+  console.log(errors.value)
+  if (!errors.value.size) {
+    console.log('submitted')
   }
 }
 </script>

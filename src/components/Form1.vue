@@ -1,29 +1,19 @@
-<script>
+<script setup lang="ts">
 import { useErrors } from "@/plugins/store";
 import { ref } from 'vue';
 
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: {
-      type: String,
-      required: true
-    }
-  },
-  setup() {
-    const { errors } = useErrors()
-    const email = ref("")
-
-    const checkError = () => {
-      
-    }
-
-    return {
-      email,
-      errors,
-      checkError
-    }
+const props = defineProps({
+  msg: {
+    type: String,
+    required: true
   }
+})
+
+const { errors } = useErrors()
+const email = ref("")
+
+const checkError = () => {
+  
 }
 </script>
 

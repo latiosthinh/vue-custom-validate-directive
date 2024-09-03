@@ -1,17 +1,7 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue';
-import HelloWorld2 from './components/HelloWorld2.vue'
-import HelloWorld3 from './components/HelloWorld3.vue'
-import { useErrors } from "@/plugins/store";
-
-import { ref } from 'vue';
-
-const { errors } = useErrors()
-const test = ref("")
-
-const checkError = () => {
-  console.log(errors.value)
-}
+import Form1 from './components/Form1.vue';
+import Form2 from './components/Form2.vue';
+import Form3 from './components/Form3.vue';
 </script>
 
 <template>
@@ -19,9 +9,9 @@ const checkError = () => {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="Form 1" />
-      <HelloWorld2 msg="Form 2" />
-      <HelloWorld3 msg="Form 3" />
+      <Form1 msg="Form 1" />
+      <Form2 msg="Form 2" />
+      <Form3 msg="Form 3" />
       
     </div>
   </header>
