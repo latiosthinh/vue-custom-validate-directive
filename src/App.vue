@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue';
 import HelloWorld2 from './components/HelloWorld2.vue'
 import HelloWorld3 from './components/HelloWorld3.vue'
+import { useErrors } from "@/plugins/store";
+
+import { ref } from 'vue';
+
+const { errors } = useErrors()
+const test = ref("")
+
+const checkError = () => {
+  console.log(errors.value)
+}
 </script>
 
 <template>
@@ -10,18 +19,12 @@ import HelloWorld3 from './components/HelloWorld3.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <!-- <HelloWorld msg="Form 1" /> -->
-      <!-- <HelloWorld2 msg="Form 2" /> -->
+      <HelloWorld msg="Form 1" />
+      <HelloWorld2 msg="Form 2" />
       <HelloWorld3 msg="Form 3" />
-
-      <nav ref="nav">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      
     </div>
   </header>
-
-  <RouterView />
 </template>
 
 <style scoped>

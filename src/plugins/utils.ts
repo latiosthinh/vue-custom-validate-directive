@@ -22,7 +22,7 @@ export const validRegex = (rules: string[], el: HTMLInputElement, regex: RegExp)
 export const validLength = (rules: string[], el: HTMLInputElement, value: unknown) => {
   if (!rules.includes(ValidateTypes.length)) return true
   if (rules.includes(ValidateTypes.length) && !value) return true
-  return rules.includes(ValidateTypes.length) && el.value.length === value
+  return rules.includes(ValidateTypes.length) && el.value.length === parseInt(value as string)
 }
 
 export const validMinLength = (rules: string[], el: HTMLInputElement, value: unknown) => {

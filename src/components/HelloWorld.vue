@@ -15,7 +15,7 @@ export default {
     const email = ref("")
 
     const checkError = () => {
-      console.log(errors.value)
+      
     }
 
     return {

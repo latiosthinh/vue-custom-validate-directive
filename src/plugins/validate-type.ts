@@ -1,5 +1,5 @@
 const ValidateTypes = {
-  firstMountedRequired: 'firstMountedRequired',
+  onMountedRequired: 'onMountedRequired',
   required: 'required',
   email: 'email',
   regex: 'regex',
