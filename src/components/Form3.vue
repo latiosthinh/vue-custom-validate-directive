@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useErrors } from "@/plugins/store";
-import { ref, getCurrentInstance, getCurrentScope } from 'vue';
+import { ref, getCurrentInstance } from 'vue';
 
 const props = defineProps({
   msg: {
@@ -15,7 +15,7 @@ const userEmail = ref("")
 const userPass = ref("")
 
 const checkError = () => {
-  self?.$validator.validateAll().then(({isValid}: any) => {
+  self?.$validator.validateAll().then(({ isValid }: any) => {
     if (isValid) {
       console.log('submitted')
       return;
@@ -33,7 +33,7 @@ const checkError = () => {
     <p>{{ msg }}</p>
     <div>
       <input type="text" placeholder="userEmail" name="userEmail" v-model="userEmail" v-validate="'required|email'"
-      :data-vv-validate-on="'blur|keyup'" />
+        :data-vv-validate-on="'blur|keyup'" />
 
       <div v-if="errors?.has('userEmail')">this is not valid</div>
       <div v-if="errors?.has('userEmail:required')">this is required</div>
@@ -41,12 +41,10 @@ const checkError = () => {
     </div>
 
     <div>
-      <input type="text" placeholder="userPass" name="userPass" 
-      v-model="userPass" v-validate="{
+      <input type="password" placeholder="userPass" name="userPass" v-model="userPass" v-validate="{
         required: true,
         length: 7
-      }"
-      :data-vv-validate-on="'blur|keyup'" />
+      }" :data-vv-validate-on="'blur|keyup'" />
 
       <div v-if="errors?.has('userPass')">this is not valid</div>
       <div v-if="errors?.has('userPass:required')">this is required</div>
