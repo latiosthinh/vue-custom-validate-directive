@@ -1,4 +1,4 @@
-import { getCurrentInstance, type App, type VNode } from 'vue'
+import { type App, type VNode } from 'vue'
 import { useErrors } from './store'
 import { validEmail, validLength, validRegex, validRequired } from './utils'
 import ValidateTypes from './validate-type'
@@ -19,7 +19,7 @@ declare global {
 
 export default {
   install: (app: App) => {
-    const { errors, currentErrorsScope, addError, delError, cleanupErrors } = useErrors()
+    const { currentErrorsScope, addError, delError, cleanupErrors } = useErrors()
 
     app.config.globalProperties.$formMaxLength = {
       email: 64,
@@ -37,13 +37,11 @@ export default {
 
     app.config.globalProperties.$validator = {
       validateAll: () => {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
           const result = !!currentErrorsScope.value
-          resolve({
-            isValid: !result
-          })
+          resolve(!result)
         })
-      },
+      }
     }
 
     app.directive('validate', {
@@ -52,9 +50,7 @@ export default {
         const isStringSchema = typeof binding.value === 'string'
         const stringRules = isStringSchema ? binding.value.split(SplitChar) : []
         const schema = isStringSchema
-          ? stringRules.map((rule: string) =>
-              rule.includes(':') ? rule.split(':') : [rule, true]
-            )
+          ? stringRules.map((rule: string) => (rule.includes(':') ? rule.split(':') : [rule, true]))
           : Object.entries(binding.value)
 
         // prevent immediate submission
@@ -114,7 +110,7 @@ export default {
         // clear cache handler
         el[UniquePropertyID] = () => {}
         cleanupErrors(vnode)
-      },
+      }
     })
   }
 }
